@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "alicegram.botAccessToken",
+      "type": "java.lang.String",
+      "description": "Access token from BotFather (@BotFather) for the alice bot."
+    }
+  ]
+}
