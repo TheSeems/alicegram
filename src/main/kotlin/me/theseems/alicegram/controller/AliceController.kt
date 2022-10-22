@@ -33,7 +33,7 @@ class AliceController {
     @Autowired
     private lateinit var userService: AlicegramUserService
 
-    @PostMapping
+    @PostMapping("/")
     @ResponseBody
     fun handleAliceRequest(@RequestBody request: AliceRequest): AliceResponse {
         val token = request.session
@@ -52,8 +52,8 @@ class AliceController {
 
     private fun handleActive(request: AliceRequest, user: AlicegramUser): AliceResponse {
         val text = request.content?.originalUtterance
-        if (text == null || text.isEmpty()) {
-            return AliceResponse("Скажите что-нибудь и я отправлю это вам в телеграм")
+        if (text.isNullOrEmpty()) {
+            return AliceResponse("Скажите что-нибудь, и я отправлю это вам в телеграм")
         }
 
         val (result, exception) = bot.sendMessage(ChatId.fromId(user.telegramChatId!!), text)
@@ -63,7 +63,7 @@ class AliceController {
         if (error != null) {
             if (code == HttpStatus.FORBIDDEN.value()) {
                 userService.unlink(user.id!!)
-                return AliceResponse.Terminal("К сожалению, вы запретили сообщения, вынуждены отвязать аккаунт")
+                return AliceResponse.Terminal("К сожалению, вы запретили сообщения, Ваш аккаунт отвязан")
             }
 
             exception?.printStackTrace()
@@ -83,7 +83,7 @@ class AliceController {
         val encoded = Base64.encodeBase64URLSafeString(verificationRequest.code.toByteArray())
         return AliceResponse(
             body = AliceResponseBody(
-                text = "Пожалуйста, подтвердите свою личность в телеграме",
+                text = "Пожалуйста, подтвердите привязку в телеграмм",
                 buttons = listOf(
                     AliceResponseButton(
                         title = "Перейти в телеграм",

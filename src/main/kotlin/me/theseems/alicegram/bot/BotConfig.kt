@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class BotController {
+class BotConfig {
     @Autowired
     private lateinit var bot: Bot
 

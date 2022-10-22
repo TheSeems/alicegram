@@ -10,12 +10,13 @@ data class AliceResponseButton(
     val hide: Boolean? = null
 )
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class AliceResponseBody(
     val text: String,
     val tts: String = text,
     @JsonProperty("end_session")
     val endSession: Boolean? = false,
-    val buttons: List<AliceResponseButton>? = null,
+    val buttons: List<AliceResponseButton>? = null
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

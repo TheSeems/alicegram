@@ -19,7 +19,7 @@ class YandexClientConfig {
             .build()
 
         return HttpServiceProxyFactory
-            .builder(WebClientAdapter(webClient)).build()
+            .builder(WebClientAdapter.forClient(webClient)).build()
             .createClient(YandexClient::class.java)
     }
 }

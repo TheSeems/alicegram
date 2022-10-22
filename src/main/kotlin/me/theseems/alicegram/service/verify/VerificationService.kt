@@ -24,7 +24,7 @@ class VerificationService {
         }
 
         // TODO: maybe lock table?
-        // TODO: we can definitely do that at SQL-level which will improve performance and robustness
+        // TODO: we can definitely do that at SQL-level which will improve performance and assure robustness
         var generatedCode: String
         do {
             generatedCode = UUID.randomUUID().toString()
